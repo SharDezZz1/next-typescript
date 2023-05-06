@@ -1,0 +1,11 @@
+.header {
+    color: red;
+    background-color: aqua;
+
+    .nav {
+        color: blue;
+        display: flex;
+        list-style-type: none;
+        gap:  20px;
+    }
+}
