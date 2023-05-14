@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
 import s from './cart.module.scss'
 import { LocalCart } from "@/modules/Cart";
+//redux
+import { RootState } from "@/store";
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct, removeProduct } from "@/store/futures/cart";
 
 const Cart = () => {
     const LCart = new LocalCart();
@@ -57,10 +61,8 @@ const Cart = () => {
                                     }
                                 }>-1</button>
                                 <button onClick={() => {
-                                    //remove from local storage 
-                                    LCart.removeFromCart(item.id);
-                                    setCart(LCart.getCart());
-                                    setTotal(LCart.getTotalPrice());
+                                    //remove from redux
+                                    dispatch(removeProduct(item.id));
                                 }} className={s.cart__container_items_item_button}>Remove</button>
                             </div>
                         )

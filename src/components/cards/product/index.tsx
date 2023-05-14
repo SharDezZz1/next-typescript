@@ -1,11 +1,15 @@
 import React from "react";
 import Image from "next/image";
+//redux
+import { useDispatch } from "react-redux";
+import { addProduct } from "@/store/futures/cart";
 //styles
 import s from "./product.module.scss";
 
 const Product = (props: any) => {
   const { product } = props;
   const { title, price, image } = product;
+  const dispatch = useDispatch();
   return (
     <>
       <div className={s.products__card}>
@@ -18,17 +22,7 @@ const Product = (props: any) => {
         <div className={s.products__card_price}>{price}</div>
         <button onClick={
           () => {
-            //add to local storage
-            let cart = localStorage.getItem("cart");
-            if (cart) {
-              let cartArray = JSON.parse(cart);
-              cartArray.push(product);
-              localStorage.setItem("cart", JSON.stringify(cartArray));
-            } else {
-              let cartArray = [];
-              cartArray.push(product);
-              localStorage.setItem("cart", JSON.stringify(cartArray));
-            }
+            dispatch(addProduct(product));
           }
         } className={s.products__card_button}>Add to cart</button>
       </div>
